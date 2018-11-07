@@ -45,3 +45,21 @@ def todo():
         
     return render_template('new.html')
     
+# 삭제하는 경로를 라우트에 추가한다.
+@app.route('/todos/<int:id>/delete')
+def delete(id):
+    # 몇번글을 삭제할지 알아낸다?
+    todo = Todo.query.get(id)
+    # 글을 삭제한다.
+    db.session.delete(todo)
+    # 상태를 저장한다.
+    db.session.commit()
+    # 어디로 보낼지(url) 설정한다. 
+    return redirect('/')
+
+
+
+
+
+
+    

@@ -10,8 +10,11 @@
                 </div>
                 <div class="col">
                     <!--수정버튼-->
+                    <!--<button type="button" class="btn btn-primary"><a href="/todos/update">수정</a></button>-->
+                    <a href="/todos/{{todo.id}}/update" class="btn btn-primary">수정</a>
                     <!--완료버튼-->
-                    
+                    <!--<button type="button" class="btn btn-success"><a href="/todos/delete">완료</a></button>-->
+                    <a href="/todos/{{todo.id}}/delete" class="btn btn-success" onclick="return confirm('완료하시겠습니까??')">완료</a>
                 </div>
             </div>
         </div>
