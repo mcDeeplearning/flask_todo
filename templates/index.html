@@ -2,7 +2,18 @@
 {% block bb %}
     <h1>여기는 index!!!</h1>
     {% for todo in todos %}
-        <h1>{{todo.todo}}</h1>
-        <h1>{{todo.deadline}}</h1>
+        <div class="jumbotron">
+            <div class="row">
+                <div class="col">
+                    <h3>{{todo.todo}}</h3>
+                    <h5>{{todo.deadline.strftime("%Y년 %m월 %d일")}}</h5>
+                </div>
+                <div class="col">
+                    <!--수정버튼-->
+                    <!--완료버튼-->
+                    
+                </div>
+            </div>
+        </div>
     {% endfor %}
 {% endblock %}
