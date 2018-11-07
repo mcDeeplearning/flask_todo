@@ -57,6 +57,26 @@ def delete(id):
     # 어디로 보낼지(url) 설정한다. 
     return redirect('/')
 
+# EDIT 처리 로직
+# EDIT하는 경로를 라우트에 추가한다.
+@app.route('/todos/<int:id>/edit')
+def edit(id):
+    # 기존의 데이터를 가져와서 수정할수 있는 폼 보여주기
+    todo = Todo.query.get(id)
+    return render_template('edit.html',todo=todo)
+
+# UPDATE 처리 로직
+# UPDATE하는 경로를 라우트에 추가한다.
+@app.route('/todos/<int:id>/update', methods=["POST"])
+def update(id):
+    # 변경한 데이터를 가져와서 db에 반영
+    todo = Todo.query.get(id)
+    todo.todo = request.form['todo']
+    todo.deadline = request.form['deadline']
+    
+    db.session.commit()
+    
+    return redirect('/')
 
 
 
