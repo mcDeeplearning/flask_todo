@@ -1,14 +1,13 @@
 {% extends 'base.html' %}
 
 {% block bb %}
-<form action="/todos/{{todo.id}}/update" method="post">
+<form action="/todos/{{todo.id}}/upgrade" method="post">
   <div class="form-group">
     <label for="todo">To Do</label>
     <input value="{{todo.todo}}" name="todo" type="text" class="form-control" id="todo" placeholder="할일을 적어주세요!!">
   </div>
   <div class="form-group">
     <label for="deadline">Deadline</label>
-    <!--<input value="{{todo.deadline.strftime('%Y-%m-%d')}}" name="deadline" type="date" class="form-control" id="deadline">-->
     <input value={{todo.deadline}} name="deadline" type="date" class="form-control" id="deadline">
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>

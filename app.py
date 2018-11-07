@@ -57,29 +57,41 @@ def delete(id):
     # 어디로 보낼지(url) 설정한다. 
     return redirect('/')
 
-# EDIT 처리 로직
-# EDIT하는 경로를 라우트에 추가한다.
-@app.route('/todos/<int:id>/edit')
-def edit(id):
-    # 기존의 데이터를 가져와서 수정할수 있는 폼 보여주기
-    todo = Todo.query.get(id)
-    return render_template('edit.html',todo=todo)
+# # EDIT 처리 로직
+# # EDIT하는 경로를 라우트에 추가한다.
+# @app.route('/todos/<int:id>/edit')
+# def edit(id):
+#     # 기존의 데이터를 가져와서 수정할수 있는 폼 보여주기
+#     todo = Todo.query.get(id)
+#     return render_template('edit.html',todo=todo)
 
-# UPDATE 처리 로직
-# UPDATE하는 경로를 라우트에 추가한다.
-@app.route('/todos/<int:id>/update', methods=["POST"])
-def update(id):
-    # 변경한 데이터를 가져와서 db에 반영
-    todo = Todo.query.get(id)
-    todo.todo = request.form['todo']
-    todo.deadline = request.form['deadline']
+# # UPDATE 처리 로직
+# # UPDATE하는 경로를 라우트에 추가한다.
+# @app.route('/todos/<int:id>/edit', methods=["POST"])
+# def update(id):
+#     # 변경한 데이터를 가져와서 db에 반영
+#     todo = Todo.query.get(id)
+#     todo.todo = request.form['todo']
+#     todo.deadline = request.form['deadline']
     
-    db.session.commit()
+#     db.session.commit()
     
-    return redirect('/')
+#     return redirect('/')
 
-
-
+@app.route('/todos/<int:id>/upgrade', methods=["POST","GET"])
+def upgrade(id):
+    todo = Todo.query.get(id)
+    if request.method == 'POST':
+        # 게시물을 실제로 업데이트 하는 로직
+        todo.todo = request.form['todo']
+        todo.deadline = request.form['deadline']
+        # 실제로 db 반영
+        db.session.commit()
+        # 어디로 보낼지 설정
+        return redirect('/')
+        
+    # 수정할 수 있는 폼을 리턴
+    return render_template('edit.html', todo=todo)
 
 
     
